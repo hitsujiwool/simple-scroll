@@ -15,7 +15,7 @@
     var initialize = function() {
       $content.append($target.children());
       $target.append($wrapper.append($container.append($content) , $scrollBase.append($scrollPane.append($scrollBar))));
-
+      alert(3);
       $window.bind('resize', resize).trigger('resize');
 
       var n = 0;
@@ -95,6 +95,7 @@
     var resize = function() {
       contentHeight = $content.height();
       visibleHeight = params.visibleHeight;
+      alert(visibleHeight);
       if ($scrollPane.height() === 0) {
         $scrollBase.css('height', '100%');
       }
