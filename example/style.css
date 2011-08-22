@@ -4,12 +4,12 @@
 }
 
 html {
+  overflow: hidden;
 }
 
 body {
   padding: 20px;
   position: relative;
-  overflow: hidden;
 }
 
 h1 {
@@ -27,18 +27,15 @@ p {
   margin-bottom: 1.5em;
 }
 
-.boxes { 
+.boxes {
   position: relative;
+  z-index: 100;
 }
 
 .box {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 100;
-}
-
-.target {
 }
 
 #menu {

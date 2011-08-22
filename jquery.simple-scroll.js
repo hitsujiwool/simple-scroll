@@ -1,4 +1,10 @@
 (function ($) {
+
+  var isLoaded = false;
+  $(window).bind('load', function(e) {
+    isLoaded = true;
+  });
+
   var SimpleScroll = function(target, params) {
     var $target = $(target)
       , $window = $(window)
@@ -15,7 +21,6 @@
     var initialize = function() {
       $content.append($target.children());
       $target.append($wrapper.append($container.append($content) , $scrollBase.append($scrollPane.append($scrollBar))));
-      alert(3);
       $window.bind('resize', resize).trigger('resize');
 
       var n = 0;
@@ -95,9 +100,12 @@
     var resize = function() {
       contentHeight = $content.height();
       visibleHeight = params.visibleHeight;
-      alert(visibleHeight);
-      if ($scrollPane.height() === 0) {
-        $scrollBase.css('height', '100%');
+      $wrapper.css({
+        height: visibleHeight,
+        visibility: 'visible'
+      });
+      if ($scrollBase.height() === 0) {
+        $scrollBase.css('height', $wrapper.height());
       }
       if (contentHeight <= visibleHeight) {
         $scrollBase.css({visibility: 'hidden'});
@@ -106,10 +114,6 @@
         $scrollBase.css({visibility: 'visible'});
         emit(null, Math.min(1, - $content.position().top / (contentHeight - visibleHeight)), false);
       }
-      $wrapper.css({
-        height: visibleHeight,
-        visibility: 'visible'
-      });
     };
     //export APIs
     this.scrollTo = scrollTo;
@@ -117,9 +121,8 @@
 
     //merge params
     params = $.extend({}, $.fn.scrollable.defaults, params || {});
-
     //wait until all images are loaded and initialize
-    $(window).bind('load', initialize);
+    isLoaded ? initialize() : $(window).bind('load', initialize);
   };
 
   $.fn.scrollable = function(options) {
