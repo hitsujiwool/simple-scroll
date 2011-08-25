@@ -133,7 +133,7 @@
 
     var scrollTo = function(selector) {
       var $anchor = $(selector);
-      emit(null, Math.min(1, $anchor.position().top / (contentHeight - visibleHeight)));
+      emit(null, Math.min(1, $anchor.offset().top / (contentHeight - visibleHeight)));
     };
 
     var reset = function(options) {
