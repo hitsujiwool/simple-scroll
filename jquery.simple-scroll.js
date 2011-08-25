@@ -46,7 +46,6 @@
         $wrapper.append($scrollBase.append($scrollPane.append($scrollBar)));
       }
 
-      //$window.bind('resize.' + ns, resize).trigger('resize.' + ns);
       setTimeout(reset, 0);
 
       var n = 0;
@@ -79,32 +78,23 @@
           };
         }()));
 
-      $scrollBar.bind('mousedown', function(e) {
-        e.preventDefault();
-        var start = e.pageY
-          , pos = $scrollBar.position().top;
-        $window.bind('mousemove.draggable', function(e) {
-          var newPos = pos + (e.pageY - start);
-          if (newPos< 0) newPos = 0;
-          if ($scrollPane.height() - $scrollBar.height() < newPos) newPos = $scrollPane.height() - $scrollBar.height();
-          $scrollBar.css('top', newPos);
-          emit($scrollBar, newPos / ($scrollPane.height() - $scrollBar.height()), false);
-        });
-        $window.one('mouseup', function(e) {
-          $window.unbind('mousemove.draggable');
-        });
-      });
-
       $scrollBar
-      /*
-        .draggable({
-          axis: "y"
-          , containment: "parent"
-          , drag: function(event, ui) {
-            var draggerY = $scrollBar.position().top;
-            emit($scrollBar, draggerY / ($scrollPane.height() - $scrollBar.height()));
-          }
-        })*/
+        .bind('mousedown', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var start = e.pageY
+            , pos = $scrollBar.position().top;
+          $window.bind('mousemove.draggable', function(e) {
+            var newPos = pos + (e.pageY - start);
+              if (newPos< 0) newPos = 0;
+              if ($scrollPane.height() - $scrollBar.height() < newPos) newPos = $scrollPane.height() - $scrollBar.height();
+              $scrollBar.css('top', newPos);
+              emit($scrollBar, newPos / ($scrollPane.height() - $scrollBar.height()), false);
+            });
+            $window.one('mouseup', function(e) {
+              $window.unbind('mousemove.draggable');
+            });
+          })
         .bind('positionchange.' + ns, function(e, emitter, pos, animate) {
           if (emitter === $scrollBar) return;
           if (animate) {
@@ -118,7 +108,7 @@
         .bind('mousewheel', function(e, delta) {
         })
         .bind('click', function(e) {
-          if (e.target === $scrollBar || ($.data($scrollBase.get(0), 'simpleScrollContext') !== ns)) return;
+          if (e.target === $scrollBar.get(0) || ($.data($scrollBase.get(0), 'simpleScrollContext') !== ns)) return;
           var px = e.pageY - $scrollBase.offset().top;
           emit($scrollBase, Math.min(1, px / ($scrollBase.height() - $scrollBar.height())));
         });
