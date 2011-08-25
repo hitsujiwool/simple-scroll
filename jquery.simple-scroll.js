@@ -132,10 +132,20 @@
     };
 
     var scrollTo = function(selector) {
-      var $anchor = $(selector);
-      if ($anchor.length > 0) {
-        emit(null, Math.min(1, $anchor.position().top / (contentHeight - visibleHeight)));
+      var $anchor
+        , pos;
+      if (selector[0] === '#') {
+        $anchor = $(selector);
+        if ($anchor.length === 0) {
+          throw new Error('unknown selector [' + selector + ']');
+        }
+        pos = Math.min(1, $anchor.position().top / (contentHeight - visibleHeight));
+      } else if (typeof selector === 'number' && 0 <= selector && selector <= 1) {
+        pos = selector;
+      } else {
+        throw new Error('invalid value');
       }
+      emit(null, pos);
       return this;
     };
 
