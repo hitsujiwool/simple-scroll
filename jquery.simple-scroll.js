@@ -133,13 +133,17 @@
 
     var scrollTo = function(selector) {
       var $anchor = $(selector);
-      emit(null, Math.min(1, $anchor.offset().top / (contentHeight - visibleHeight)));
+      if ($anchor.length > 0) {
+        emit(null, Math.min(1, $anchor.position().top / (contentHeight - visibleHeight)));
+      }
+      return this;
     };
 
     var reset = function(options) {
       $.data($scrollBase.get(0), 'simpleScrollContext', ns);
       params = $.extend(params, options);
       resize();
+      return this;
     };
 
     var resize = function() {
