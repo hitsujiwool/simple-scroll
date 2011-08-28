@@ -64,6 +64,7 @@
           var flag = 0
             , tmp;
           return function(e, delta) {
+            e.preventDefault();
             var range = contentHeight - visibleHeight;
             flag = flag++ === 3 ? 0 : flag;
             if (flag > 0 || range < 0) return;
@@ -105,8 +106,6 @@
         });
 
       $scrollBase
-        .bind('mousewheel', function(e, delta) {
-        })
         .bind('click', function(e) {
           if (e.target === $scrollBar.get(0) || ($.data($scrollBase.get(0), 'simpleScrollContext') !== ns)) return;
           var px = e.pageY - $scrollBase.offset().top;
@@ -184,7 +183,8 @@
     easing: 'easeOutCubic',
     duration: 800,
     minBarHeight: 0.05,
-    externalScrollBar: '#scrollBar',
-    paneHeight: null
+    externalScrollBar: null,
+    paneHeight: null,
+    mousewheel: false
   };
 })(jQuery);
