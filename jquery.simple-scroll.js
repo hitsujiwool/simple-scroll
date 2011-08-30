@@ -15,7 +15,7 @@
 
   var SimpleScroll = function(target, params) {
     params = $.extend({}, $.fn.scrollable.defaults, params || {});
-    var $externalScrollBar = $(document.querySelector(params.externalScrollBar))
+    var $externalScrollBar = $(params.externalScrollBar)
       , $target = $(target)
       , $window = $(window)
       , $wrapper = $('<div class="simpleScrollWrapper"/>')
