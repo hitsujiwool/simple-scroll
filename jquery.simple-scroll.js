@@ -18,6 +18,7 @@
     var $externalScrollBar = $(params.externalScrollBar)
       , $target = $(target)
       , $window = $(window)
+      , $document = $(document)
       , $wrapper = $('<div class="simpleScrollWrapper"/>')
       , $container = $('<div class="simpleScrollContainer"/>')
       , $content = $('<div class="simpleScrollContent"/>')
@@ -85,15 +86,15 @@
           e.stopPropagation();
           var start = e.pageY
             , pos = $scrollBar.position().top;
-          $window.bind('mousemove.draggable', function(e) {
+          $document.bind('mousemove.draggable', function(e) {
             var newPos = pos + (e.pageY - start);
               if (newPos< 0) newPos = 0;
               if ($scrollPane.height() - $scrollBar.height() < newPos) newPos = $scrollPane.height() - $scrollBar.height();
               $scrollBar.css('top', newPos);
               emit($scrollBar, newPos / ($scrollPane.height() - $scrollBar.height()), false);
             });
-            $window.one('mouseup', function(e) {
-              $window.unbind('mousemove.draggable');
+            $document.one('mouseup', function(e) {
+              $document.unbind('mousemove.draggable');
             });
           })
         .bind('positionchange.' + ns, function(e, emitter, pos, animate) {
