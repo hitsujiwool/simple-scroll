@@ -129,7 +129,7 @@
         if ($anchor.length === 0) {
           throw new Error('unknown selector [' + selector + ']');
         }
-        pos = Math.min(1, $anchor.position().top / (contentHeight - visibleHeight));
+        pos = Math.min(1, $anchor.offset().top / (contentHeight - visibleHeight));
       } else if (typeof selector === 'number' && 0 <= selector && selector <= 1) {
         pos = selector;
       } else {
