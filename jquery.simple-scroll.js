@@ -27,9 +27,9 @@
       , $scrollPane = $('<div class="simpleScrollScrollPane"/>');
 
     var contentHeight
-      , visibleHeight;
-
-    var ns = generateNamespace();
+      , visibleHeight
+      , n
+      , ns = generateNamespace();
 
     var initialize = function() {
       $content.append($target.children());
@@ -49,7 +49,6 @@
 
       setTimeout(reset, 0);
 
-      var n = 0;
       $content
         .unbind('mousewheel')
         .bind('positionchange.' + ns, function(e, emitter, pos, animate) {
@@ -59,6 +58,7 @@
             });
           } else {
             $content.stop().css('top', - pos * (contentHeight - visibleHeight));
+            n = -$(this).position().top;
           }
         })
         .bind('mousewheel', (function() {
@@ -156,6 +156,7 @@
       $scrollBase.css('height', params.PaneHeight || $scrollBase.parent().height());
 
       if (contentHeight <= visibleHeight) {
+        emit(null, 0, false);
         $scrollBase.css({visibility: 'hidden'});
       } else {
         $scrollBar.height(Math.max(visibleHeight / contentHeight * $scrollBase.height(), params.minBarHeight));
