@@ -32,6 +32,7 @@
       , ns = generateNamespace();
 
     var initialize = function() {
+      console.log('initialize', ns);
       $content.append($target.children());
       $target.append($wrapper.append($container.append($content)));
 
@@ -46,8 +47,6 @@
       } else {
         $wrapper.append($scrollBase.append($scrollPane.append($scrollBar)));
       }
-
-      setTimeout(reset, 0);
 
       $content
         .unbind('mousewheel')
@@ -112,6 +111,8 @@
           var px = e.pageY - $scrollBase.offset().top;
           emit($scrollBase, Math.min(1, px / ($scrollBase.height() - $scrollBar.height())));
         });
+
+      reset();
     };
 
     var emit = function(emitter, data, animate) {
@@ -166,7 +167,7 @@
     };
     //export APIs
     this.scrollTo = scrollTo;
-    this.reset = reset;
+    this.reset = function() { setTimeout(reset, 0); };
 
     //wait until all images are loaded and initialize
     isLoaded ? setTimeout(initialize, 0) : $(window).bind('load', initialize);
