@@ -32,7 +32,6 @@
       , ns = generateNamespace();
 
     var initialize = function() {
-      console.log('initialize', ns);
       $content.append($target.children());
       $target.append($wrapper.append($container.append($content)));
 
