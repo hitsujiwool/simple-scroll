@@ -49,14 +49,18 @@
 
       $content
         .unbind('mousewheel')
-        .bind('positionchange.' + ns, function(e, emitter, pos, animate) {
+        .bind('positionchange.' + ns, function(e, emitter, relPos, animate) {
+          var absPos = relPos * contentHeight;
+          if (absPos + visibleHeight > contentHeight) {
+            absPos = contentHeight - visibleHeight;
+          }
           if (animate) {
-            $content.stop().animate({top: - pos * (contentHeight - visibleHeight)}, params.duration, params.easing, function() {
-              n = -$(this).position().top;
+            $content.stop().animate({top: - absPos}, params.duration, params.easing, function() {
+              n = absPos;
             });
           } else {
-            $content.stop().css('top', - pos * (contentHeight - visibleHeight));
-            n = -$(this).position().top;
+            $content.stop().css('top', - absPos);
+            n = absPos;
           }
         })
         .bind('mousewheel', (function() {
@@ -74,7 +78,7 @@
             } else if (n < 0) {
               n = 0;
             }
-            if (tmp !== n) emit($content, n / range);
+            if (tmp !== n) emit($content, n / contentHeight);
           };
         }()));
 
@@ -86,29 +90,36 @@
             , pos = $scrollBar.position().top;
           $document.bind('mousemove.draggable', function(e) {
             var newPos = pos + (e.pageY - start);
-              if (newPos< 0) newPos = 0;
-              if ($scrollPane.height() - $scrollBar.height() < newPos) newPos = $scrollPane.height() - $scrollBar.height();
+              if (newPos < 0) newPos = 0;
+              if ($scrollPane.height() - $scrollBar.height() < newPos) {
+                newPos = $scrollPane.height() - $scrollBar.height();
+              }
               $scrollBar.css('top', newPos);
-              emit($scrollBar, newPos / ($scrollPane.height() - $scrollBar.height()), false);
+              emit($scrollBar, newPos / $scrollPane.height(), false);
             });
             $document.one('mouseup', function(e) {
               $document.unbind('mousemove.draggable');
             });
           })
-        .bind('positionchange.' + ns, function(e, emitter, pos, animate) {
+        .bind('positionchange.' + ns, function(e, emitter, relPos, animate) {
+          var absPos = relPos * $scrollPane.height();
+          if (absPos + $scrollBar.height() > $scrollPane.height()) {
+            absPos = $scrollPane.height() - $scrollBar.height();
+          }
           if (emitter === $scrollBar) return;
           if (animate) {
-            $scrollBar.stop().animate({top: pos * ($scrollPane.height() - $scrollBar.height())}, params.duration, params.easing);
+            $scrollBar.stop().animate({top: absPos}, params.duration, params.easing);
           } else {
-            $scrollBar.stop().css('top', pos * ($scrollPane.height() - $scrollBar.height()));
+            $scrollBar.stop().css('top', absPos);
           }
         });
 
       $scrollBase
         .bind('click', function(e) {
+          var pos;
           if (e.target === $scrollBar.get(0) || ($.data($scrollBase.get(0), 'simpleScrollContext') !== ns)) return;
-          var px = e.pageY - $scrollBase.offset().top;
-          emit($scrollBase, Math.min(1, px / ($scrollBase.height() - $scrollBar.height())));
+          pos = e.pageY - $scrollBase.offset().top;
+          emit($scrollBase, Math.min(1, pos / $scrollBase.height()));
         });
 
       reset();
@@ -129,7 +140,7 @@
         if ($anchor.length === 0) {
           throw new Error('unknown selector [' + selector + ']');
         }
-        pos = Math.min(1, $anchor.offset().top / (contentHeight - visibleHeight));
+        pos = Math.min(1, $anchor.offset().top / contentHeight);
       } else if (typeof selector === 'number' && 0 <= selector && selector <= 1) {
         pos = selector;
       } else {
@@ -160,7 +171,7 @@
       } else {
         $scrollBar.height(Math.max(visibleHeight / contentHeight * $scrollBase.height(), params.minBarHeight));
         $scrollBase.css({visibility: 'visible'});
-        emit(null, Math.min(1, - $content.position().top / (contentHeight - visibleHeight)), false);
+        emit(null, Math.min(1, - $content.position().top / contentHeight), false);
       }
     };
     //export APIs
