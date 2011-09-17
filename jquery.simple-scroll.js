@@ -141,7 +141,7 @@
 
     var reset = function(options) {
       $.data($scrollBase.get(0), 'simpleScrollContext', ns);
-      params = $.extend(params, options);
+      params = $.extend(params, options || {});
       resize();
       return this;
     };
@@ -154,7 +154,6 @@
         visibility: 'visible'
       });
       $scrollBase.css('height', params.PaneHeight || $scrollBase.parent().height());
-
       if (contentHeight <= visibleHeight) {
         emit(null, 0, false);
         $scrollBase.css({visibility: 'hidden'});
@@ -166,7 +165,7 @@
     };
     //export APIs
     this.scrollTo = scrollTo;
-    this.reset = function() { setTimeout(reset, 0); };
+    this.reset = function(options) { setTimeout(function() { reset(options); }, 0); };
 
     //wait until all images are loaded and initialize
     isLoaded ? setTimeout(initialize, 0) : $(window).bind('load', initialize);
