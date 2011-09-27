@@ -28,7 +28,7 @@
 
     var contentHeight
       , visibleHeight
-      , n
+      , n = 0
       , ns = generateNamespace();
 
     var initialize = function() {
@@ -46,6 +46,30 @@
       } else {
         $wrapper.append($scrollBase.append($scrollPane.append($scrollBar)));
       }
+
+      $content.swipe({
+        swipeStatus: (function() {
+          var tmp;
+          var initialPos;
+          return function(e, phase, direction, distance) {
+            var range = contentHeight - visibleHeight;
+            if (range < 0) return;
+            if (!(direction === null || direction === 'up' || direction === 'down')) return;
+            if (phase === 'start') {
+              initialPos = n;
+            }
+            distance = direction === 'down' ? -distance : distance;
+            n = initialPos + distance * 3;
+            if (n > range) {
+              n = range;
+            } else if (n < 0) {
+              n = 0;
+            }
+            if (tmp !== n) emit($content, n / range);
+          };
+        })(),
+        threshold: 100
+      });
 
       $content
         .unbind('mousewheel')
