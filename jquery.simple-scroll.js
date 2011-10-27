@@ -77,10 +77,12 @@
           if (animate) {
             $content.stop().animate({top: - pos * (contentHeight - visibleHeight)}, params.duration, params.easing, function() {
               n = -$(this).position().top;
+              params.onScroll(n);
             });
           } else {
             $content.stop().css('top', - pos * (contentHeight - visibleHeight));
             n = -$(this).position().top;
+            params.onScroll(n);
           }
         })
         .bind('mousewheel', (function() {
@@ -163,6 +165,10 @@
       return this;
     };
 
+    var scrollTop = function() {
+      return - $content.position().top;
+    };
+
     var reset = function(options) {
       $.data($scrollBase.get(0), 'simpleScrollContext', ns);
       params = $.extend(params, options || {});
@@ -190,6 +196,7 @@
     //export APIs
     this.scrollTo = scrollTo;
     this.reset = function(options) { setTimeout(function() { reset(options); }, 0); };
+    this.scrollTop = scrollTop;
 
     //wait until all images are loaded and initialize
     isLoaded ? setTimeout(initialize, 0) : $(window).bind('load', initialize);
@@ -203,6 +210,7 @@
   };
 
   $.fn.scrollable.defaults = {
+    onScroll: function() {},
     sensitivity: 200,
     visibleHeight: 300,
     easing: 'easeOutCubic',
