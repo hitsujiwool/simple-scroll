@@ -8,46 +8,36 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script src="../jquery.simple-scroll.js"></script>
-<script src="../jquery.mousewheel.min.js"></script>
 <script src="./site.js"></script>
 </head>
-<body>  
-<h1>JQuery Simple Scroll</h1>
-<ul id="menu">
-  <li><a href="javascript:void(0);">1</a></li>
-  <li><a href="javascript:void(0);">2</a></li>
-</ul>
-<div class="boxes">
-  <div id="example1" class="box">
-    <h2>Example1</h2>
-    <div class="target">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Etiam ut metus metus. Donec interdum nisi a risus sagittis dapibus rhoncus nulla rhoncus. Sed a arcu at tellus sagittis tempus at ut erat. Sed ut elementum lorem. Vivamus nulla nunc, laoreet vitae adipiscing a, scelerisque sed est. Quisque ut tortor vestibulum orci tincidunt fermentum. Proin et lorem nulla. Nullam lorem felis, consectetur eu dictum dignissim, accumsan quis est. Ut congue tempor neque non faucibus. Nunc pulvinar porta erat sit amet tincidunt. Nunc rhoncus suscipit diam, nec eleifend augue vulputate imperdiet.</p>
-      <p id="anchor">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Etiam ut metus metus. Donec interdum nisi a risus sagittis dapibus rhoncus nulla rhoncus. Sed a arcu at tellus sagittis tempus at ut erat. Sed ut elementum lorem. Vivamus nulla nunc, laoreet vitae adipiscing a, scelerisque sed est. Quisque ut tortor vestibulum orci tincidunt fermentum. Proin et lorem nulla. Nullam lorem felis, consectetur eu dictum dignissim, accumsan quis est. Ut congue tempor neque non faucibus. Nunc pulvinar porta erat sit amet tincidunt. Nunc rhoncus suscipit diam, nec eleifend augue vulputate imperdiet.</p>
-    </div>
-    <input type="button" id="scrollTo" value="Scroll to #anchor"/>
-  </div>
-  <div id="example2" class="box">
-    <h2>Example2</h2>
-    <div class="target">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel, lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-      <p>Aliquam at leo eu dolor ornare pharetra. Cras non nulla dolor. Proin enim tortor, ultrices ac accumsan in, vestibulum vel ipsum. Quisque euismod justo hendrerit dui imperdiet lobortis. Nam a metus nec nisl hendrerit molestie. Sed augue lorem, dapibus non vehicula quis, varius id nulla. Donec tellus erat, tincidunt in pretium commodo, tempus ac ante. Phasellus tristique, magna id vulputate venenatis, augue sem molestie enim, non convallis urna dolor eget arcu. Vestibulum id sagittis orci.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae purus ante. In vitae ante velit, mollis vehicula justo. Cras vehicula commodo lobortis. Etiam sit amet nulla dignissim lacus scelerisque ornare vel vitae tellus. In ut libero mi, nec feugiat dui. Mauris lacinia tellus at nisl aliquam eu lacinia leo varius. Aenean enim nibh, laoreet nec sollicitudin vel,lacinia vitae quam. Vivamus ullamcorper leo ac diam adipiscing fermentum. Mauris auctor molestie purus, vel porta nisi lacinia quis.</p>
-    </div>
-  </div>
+<body>
+	<h1>JQuery Simple Scroll</h1>
+	<div id="example1" class="box">
+		<p id="log"></p>
+		<div class="target">
+			<ul>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+				 <li>content</li>
+			</ul>
+		</div>
+		<input type="button" id="scrollTo" value="Scroll to #anchor"/>
+	</div>
 </div>
 </body>
 </html>

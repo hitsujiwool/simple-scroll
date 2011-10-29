@@ -2,79 +2,44 @@
   margin: 0;
   padding: 0;
 }
-
 html {
   overflow: hidden;
 }
-
 body {
   padding: 20px;
   position: relative;
 }
-
+img {
+  vertical-align: bottom;
+  border: none;
+}
 h1 {
   margin-bottom: 15px;
   font-size: 150%;
 }
-
 h2 {
   margin-bottom: 15px;
   font-size: 130%;
 }
-
 p {
   line-height: 1.5;
   margin-bottom: 1.5em;
 }
-
-.boxes {
-  position: relative;
-  z-index: 100;
+li {
+  padding: 10px;
 }
-
-.box {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#menu {
-  margin-bottom: 20px;  
-}
-
-#menu li {
-  margin-right: 10px;
-  display: inline;
-}
-
 #example1 .target {
   padding: 20px 20px 20px 20px;
   border: 1px solid #222222;
-  width: 300px;
+  width: 620px;
+  height: 400px;
 }
-
 #anchor {
   color: red;
 }
-
 #scrollTo {
   margin-top: 10px;
 }
-
-#example2 .target {
-  width: 500px;
-  padding-right: 20px;
-}
-
-#example2 {
-  width: 100%;
-}
-
-#example2 .target {
-  width: 100%;
-}
-
-
 /*
 * Scrollbar design
 */
@@ -91,7 +56,6 @@ p {
   cursor: pointer
   cursor: s-resize;
 }
-
 #example1 .simpleScrollScrollBar {
   width: 10px;
   height: 100px;
@@ -100,38 +64,3 @@ p {
   background-color: #222222;
   cursor: pointer;
 }
-
-#example2 .simpleScrollContainer {
-}
-
-#example2 .simpleScrollContent {
-}
-
-#example2 .simpleScrollScrollBase {
-  margin: 0;
-  width: 20px;
-  position: absolute;
-  right: -15px;
-}
-
-#example2 .simpleScrollScrollPane {
-  width: 1px;
-  position: relative;
-  left: 10px;
-  background: #e50080;
-  cursor: pointer
-  cursor: s-resize;
-}
-
-#example2 .simpleScrollScrollBar {
-  margin-left: -3.5px;
-  width: 8px;
-  height: 100px;
-  position: absolute;
-  overflow: hidden;
-  background: #e50080;
-  color: #e50080;
-  cursor: pointer;
-}
-
-
