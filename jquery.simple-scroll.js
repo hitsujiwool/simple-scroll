@@ -84,14 +84,19 @@
         $wrapper.append($scrollBase.append($scrollPane.append($scrollBar)));
       }
       
+      var loop;
       $content
         .bind('positionchange.' + ns, function(e, emitter, relPos, animate) {
+          clearInterval(loop);
+          loop = setInterval(function() {
+             that.emit('scroll');
+          }, 50);
           $content.stop().animate({top: - relPos * (contentHeight - visibleHeight)}, (animate ? params.duration : 0), params.easing, function() {
-            $.data($content.get(0), 'data-simple-scroll-position', - $content.position().top);
+            $content.data('data-simple-scroll-position', - $content.position().top);
+            clearInterval(loop);
           });
         })
         .bind('mousewheel', (function() {
-          console.log(1);
           var flag = 0;
           return function(e, delta) {
             var currentPos,
@@ -99,10 +104,10 @@
                 range = contentHeight - visibleHeight,
                 flag = flag++ === 3 ? 0 : flag;
             if (flag > 0 || range < 0) return;
-            currentPos = $.data($content.get(0), 'data-simple-scroll-position') || 0;
+            currentPos = $content.data('data-simple-scroll-position') || 0;
             absPos = trim(0, range, currentPos - delta * params.sensitivity);
             if (absPos !== currentPos) {
-              $.data($content.get(0), 'data-simple-scroll-position', absPos);
+              $content.data('data-simple-scroll-position', absPos);
               emit($content, absPos / range);
             }
           };
@@ -118,7 +123,7 @@
               if (range < 0) return;
               initialDirection = initialDirection || direction;
               if (phase === 'start') {
-                currentPos = $.data($content.get(0), 'data-simple-scroll-position') || 0;
+                currentPos = $content.data('data-simple-scroll-position') || 0;
               } else if (phase === 'end') {
                 initialDirection = null;
               } else if (phase === 'cancel') {
@@ -126,7 +131,7 @@
                 distance = direction === 'down' ? -distance : distance;
                 absPos = trim(0, range, currentPos + distance * 3);
                 if (currentPos !== absPos) {
-                  $.data($content.get(0), 'data-simple-scroll-position', absPos);
+                  $content.data('data-simple-scroll-position', absPos);
                   emit($content, absPos / range);
                 }
               }
@@ -181,7 +186,7 @@
         if ($anchor.length === 0) {
           throw new Error('unknown selector [' + selector + ']');
         }
-        pos = Math.min(1, $anchor.offset().top / (contentHeight - visibleHeight));
+        pos = Math.min(1, $anchor.position().top / (contentHeight - visibleHeight));
       } else if (typeof selector === 'number' && 0 <= selector && selector <= 1) {
         pos = selector;
       } else {
@@ -234,9 +239,9 @@
     var that = this;
     this.scrollable.api = function(i) {
       if (typeof i === 'number') {
-        return $.data(that[i], 'data-simple-scroll-api');
+        return that.eq(i).data('data-simple-scroll-api');
       } else {
-        return $.data(i, 'data-simple-scroll-api');
+        return i.data('data-simple-scroll-api');
       }
     };
     return this.each(function() {
