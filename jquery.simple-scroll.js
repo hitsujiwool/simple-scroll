@@ -1,5 +1,4 @@
 (function ($) {
-
   /**
    * EventEmitter Pattern from move.js written by visionmedia
    * https://github.com/visionmedia/move.js/blob/master/move.js
@@ -26,7 +25,7 @@
     return this;
   };
 
-  var dfds = [];
+  var dfd = $.Deferred();
 
   var generateNamespace = (function() {
     var i = 0;
@@ -63,10 +62,7 @@
     var that = this,
         contentHeight,
         visibleHeight,
-        ns = generateNamespace(),
-        n = 0;
-
-
+        ns = generateNamespace();
 
     var initialize = function() {
       $content.append($elem.children());
@@ -230,7 +226,7 @@
     this.scrollTop = scrollTop;
 
     //wait until all images are loaded and initialize
-    $.when.apply(null, dfds).done(initialize);
+    $.when(dfd).done(initialize);
   };
   
   SimpleScroll.prototype = new EventEmitter();
@@ -250,6 +246,8 @@
     });
   };
 
+  window.onload = dfd.resolve();
+
   $.fn.scrollable.defaults = {
     onScroll: function() {},
     sensitivity: 200,
@@ -261,21 +259,6 @@
     paneHeight: null,
     mousewheel: false
   };
-
-  $(function() {
-    $('img').each(function(i, elem) {
-      var dfd = new $.Deferred();
-      $(elem)
-        .bind('load', function() {
-          dfd.resolve();
-        })
-        .bind('error', function() {
-          dfd.resolve();
-        });
-      dfds.push(dfd);
-    });
-  });
-
 })(jQuery);
 
 
