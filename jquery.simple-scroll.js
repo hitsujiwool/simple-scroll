@@ -106,6 +106,7 @@
               $content.data('data-simple-scroll-position', absPos);
               emit($content, absPos / range);
             }
+            e.preventDefault();
           };
         }()))
         .swipe({
